@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_fragment_nav_graph"
+    app:startDestination="@id/collections_list">
+    <fragment
+        android:id="@+id/collections_list"
+        android:name="com.kach.tuts.view.fragments.CollectionListFragment">
+        <action
+            android:id="@+id/collections_to_test"
+            app:destination="@id/questions" />
+    </fragment>
+    <fragment
+        android:id="@+id/questions"
+        android:name="com.kach.tuts.view.fragments.QuestionsFragment" />
+</navigation>
