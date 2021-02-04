@@ -1,14 +1,14 @@
-package com.kach.tuts.view.fragments
+package com.kach.easylearning.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kach.tuts.activityViewModels
-import com.kach.tuts.databinding.QuestionsFragmentBinding
-import com.kach.tuts.view.adapters.QuestionStackAdapter
-import com.kach.tuts.viewmodels.MainActivityViewModel
+import com.kach.easylearning.activityViewModels
+import com.kach.easylearning.databinding.QuestionsFragmentBinding
+import com.kach.easylearning.view.adapters.QuestionStackAdapter
+import com.kach.easylearning.viewmodels.MainActivityViewModel
 
 class QuestionsFragment : Fragment() {
     private val viewModel: MainActivityViewModel by activityViewModels()

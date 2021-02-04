@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/question_padding"
+            android:textAlignment="center"
             android:textColor="@color/collections_title_text"
             android:textSize="@dimen/question_text_size"
             app:layout_constraintBottom_toTopOf="@+id/question_description_text"

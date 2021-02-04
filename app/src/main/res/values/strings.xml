@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tuts</string>
+    <string name="app_name" translatable="false">Easy Learning</string>
     <string name="total_questions">%d questions</string>
     <string name="todo" translatable="false">Todo</string>
     <string name="question_number">Question %d</string>

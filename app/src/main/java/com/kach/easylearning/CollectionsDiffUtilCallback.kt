@@ -1,11 +1,11 @@
-package com.kach.tuts
+package com.kach.easylearning
 
 import androidx.recyclerview.widget.DiffUtil
-import com.kach.tuts.model.TutsQuestion
+import com.kach.easylearning.model.EasyLearningCollectionTemp
 
-class QuestionsDiffUtilCallback(
-    private val oldList: List<TutsQuestion>,
-    private val newList: List<TutsQuestion>
+class CollectionsDiffUtilCallback(
+    private val oldList: List<EasyLearningCollectionTemp>,
+    private val newList: List<EasyLearningCollectionTemp>
 ) : DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
 

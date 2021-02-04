@@ -1,17 +1,17 @@
-package com.kach.tuts.view.adapters
+package com.kach.easylearning.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kach.tuts.QuestionsDiffUtilCallback
-import com.kach.tuts.R
-import com.kach.tuts.databinding.QuestionItemBinding
-import com.kach.tuts.model.TutsQuestion
+import com.kach.easylearning.QuestionsDiffUtilCallback
+import com.kach.easylearning.R
+import com.kach.easylearning.databinding.QuestionItemBinding
+import com.kach.easylearning.model.EasyLearningQuestion
 
 class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionStackViewHolder>() {
-    private val items = mutableListOf<TutsQuestion>()
+    private val items = mutableListOf<EasyLearningQuestion>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionStackViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,7 +24,7 @@ class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionS
         with(holder.binding) {
             questionText.text = item.data
             questionNumberText.text =
-                root.context.getString(R.string.question_number, holder.bindingAdapterPosition)
+                root.context.getString(R.string.question_number, holder.bindingAdapterPosition + 1)
             questionDescriptionText.text = item.description
             questionDescriptionText.isVisible = item.description != null
         }
@@ -32,7 +32,7 @@ class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionS
 
     override fun getItemCount() = items.size
 
-    fun setItems(newItems: List<TutsQuestion>) {
+    fun setItems(newItems: List<EasyLearningQuestion>) {
         val diff = DiffUtil.calculateDiff(QuestionsDiffUtilCallback(items, newItems))
         items.clear()
         items.addAll(newItems)

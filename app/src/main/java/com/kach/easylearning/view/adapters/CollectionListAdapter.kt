@@ -1,18 +1,18 @@
-package com.kach.tuts.view.adapters
+package com.kach.easylearning.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kach.tuts.CollectionsDiffUtilCallback
-import com.kach.tuts.R
-import com.kach.tuts.databinding.CollectionItemBinding
-import com.kach.tuts.model.TutsCollectionTemp
+import com.kach.easylearning.CollectionsDiffUtilCallback
+import com.kach.easylearning.R
+import com.kach.easylearning.databinding.CollectionItemBinding
+import com.kach.easylearning.model.EasyLearningCollectionTemp
 
 class CollectionListAdapter : RecyclerView.Adapter<CollectionListAdapter.CollectionItemViewHolder>() {
-    private var itemClickListener: ((TutsCollectionTemp) -> Unit)? = null
+    private var itemClickListener: ((EasyLearningCollectionTemp) -> Unit)? = null
 
-    private val items: MutableList<TutsCollectionTemp> = mutableListOf()
+    private val items: MutableList<EasyLearningCollectionTemp> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -28,7 +28,7 @@ class CollectionListAdapter : RecyclerView.Adapter<CollectionListAdapter.Collect
     override fun onBindViewHolder(holder: CollectionItemViewHolder, position: Int) {
         val item = items[holder.bindingAdapterPosition]
         with(holder.binding) {
-            collectionAuthor.text = item.authorId
+            collectionAuthor.text = "TODO"
             val totalString = holder.itemView.context.getString(R.string.total_questions, item.totalItems)
             collectionQuestionsAmount.text = totalString
             collectionTitle.text = item.title
@@ -37,14 +37,14 @@ class CollectionListAdapter : RecyclerView.Adapter<CollectionListAdapter.Collect
 
     override fun getItemCount() = items.size
 
-    fun setItems(newItems: List<TutsCollectionTemp>) {
+    fun setItems(newItems: List<EasyLearningCollectionTemp>) {
         val diff = DiffUtil.calculateDiff(CollectionsDiffUtilCallback(items, newItems))
         items.clear()
         items.addAll(newItems)
         diff.dispatchUpdatesTo(this)
     }
 
-    fun setItemClickListener(block: ((TutsCollectionTemp) -> Unit)?) {
+    fun setItemClickListener(block: ((EasyLearningCollectionTemp) -> Unit)?) {
         itemClickListener = block
     }
 

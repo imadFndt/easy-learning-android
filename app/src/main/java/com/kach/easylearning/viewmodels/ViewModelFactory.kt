@@ -1,8 +1,8 @@
-package com.kach.tuts.viewmodels
+package com.kach.easylearning.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kach.tuts.TutsApplication
+import com.kach.easylearning.EasyLearningApplication
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -11,7 +11,7 @@ class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
     internal lateinit var map: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
 
     init {
-        TutsApplication.component.inject(this)
+        EasyLearningApplication.component.inject(this)
     }
 
     @Suppress("UNCHECKED_CAST")

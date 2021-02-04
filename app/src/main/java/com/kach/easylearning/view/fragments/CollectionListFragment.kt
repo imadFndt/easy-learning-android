@@ -1,4 +1,4 @@
-package com.kach.tuts.view.fragments
+package com.kach.easylearning.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.kach.tuts.R
-import com.kach.tuts.activityViewModels
-import com.kach.tuts.databinding.CollectionListFragmentBinding
-import com.kach.tuts.view.adapters.CollectionListAdapter
-import com.kach.tuts.viewmodels.MainActivityViewModel
+import com.kach.easylearning.R
+import com.kach.easylearning.activityViewModels
+import com.kach.easylearning.databinding.CollectionListFragmentBinding
+import com.kach.easylearning.view.adapters.CollectionListAdapter
+import com.kach.easylearning.viewmodels.MainActivityViewModel
 
 class CollectionListFragment : Fragment() {
     private val activityViewModel: MainActivityViewModel by activityViewModels()
@@ -29,9 +29,7 @@ class CollectionListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val listAdapter = CollectionListAdapter()
-        listAdapter.setItemClickListener {
-            activityViewModel.setSelectedCollection(it)
-        }
+        listAdapter.setItemClickListener { activityViewModel.setSelectedCollection(it) }
         with(binding.recycler) {
             adapter = listAdapter
             val decor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {

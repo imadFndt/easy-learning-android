@@ -1,6 +1,6 @@
-package com.kach.tuts.dagger
+package com.kach.easylearning.dagger
 
-import com.kach.tuts.viewmodels.ViewModelFactory
+import com.kach.easylearning.viewmodels.ViewModelFactory
 import dagger.Component
 import javax.inject.Singleton
 

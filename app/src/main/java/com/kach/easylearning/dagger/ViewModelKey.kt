@@ -1,4 +1,4 @@
-package com.kach.tuts.dagger
+package com.kach.easylearning.dagger
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

@@ -1,8 +1,8 @@
-package com.kach.tuts.model
+package com.kach.easylearning.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TutsCollectionTemp(
+data class EasyLearningCollectionTemp(
     val id: String,
     val title: String,
     val description: String,

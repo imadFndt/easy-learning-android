@@ -1,12 +1,13 @@
-package com.kach.tuts.view
+package com.kach.easylearning.view
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import com.kach.tuts.R
-import com.kach.tuts.viewmodels.MainActivityViewModel
-import com.kach.tuts.viewmodels.ViewModelFactory
+import com.kach.easylearning.R
+import com.kach.easylearning.viewmodels.MainActivityViewModel
+import com.kach.easylearning.viewmodels.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels(factoryProducer = ::ViewModelFactory)
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.selectedCollection.observe(this) { selected ->
             val controller = findNavController(R.id.nav_fragment)
             selected?.let { controller.navigate(R.id.collections_to_test) } ?: run { controller.navigateUp() }
+        }
+        viewModel.messages.observe(this) { state ->
+            if (!state) Toast.makeText(this, "Something's wrong", Toast.LENGTH_SHORT).show()
         }
     }
 

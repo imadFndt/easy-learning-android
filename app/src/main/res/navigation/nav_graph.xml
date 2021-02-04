@@ -5,12 +5,12 @@
     app:startDestination="@id/collections_list">
     <fragment
         android:id="@+id/collections_list"
-        android:name="com.kach.tuts.view.fragments.CollectionListFragment">
+        android:name="com.kach.easylearning.view.fragments.CollectionListFragment">
         <action
             android:id="@+id/collections_to_test"
             app:destination="@id/questions" />
     </fragment>
     <fragment
         android:id="@+id/questions"
-        android:name="com.kach.tuts.view.fragments.QuestionsFragment" />
+        android:name="com.kach.easylearning.view.fragments.QuestionsFragment" />
 </navigation>

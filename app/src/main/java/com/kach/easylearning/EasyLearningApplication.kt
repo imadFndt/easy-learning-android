@@ -1,10 +1,10 @@
-package com.kach.tuts
+package com.kach.easylearning
 
 import android.app.Application
-import com.kach.tuts.dagger.AppComponent
-import com.kach.tuts.dagger.DaggerAppComponent
+import com.kach.easylearning.dagger.AppComponent
+import com.kach.easylearning.dagger.DaggerAppComponent
 
-class TutsApplication : Application() {
+class EasyLearningApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         component = DaggerAppComponent.builder().build()

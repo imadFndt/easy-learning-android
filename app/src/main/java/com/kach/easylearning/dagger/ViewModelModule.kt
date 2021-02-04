@@ -1,7 +1,7 @@
-package com.kach.tuts.dagger
+package com.kach.easylearning.dagger
 
 import androidx.lifecycle.ViewModel
-import com.kach.tuts.viewmodels.MainActivityViewModel
+import com.kach.easylearning.viewmodels.MainActivityViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

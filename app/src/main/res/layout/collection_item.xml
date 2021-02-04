@@ -25,7 +25,10 @@
         android:layout_marginStart="@dimen/text_margin_collection_item"
         android:layout_marginBottom="@dimen/text_margin_collection_item"
         android:textSize="16sp"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collection_questions_amount"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/collection_title"
         tools:text="Качмазов А.А" />
