@@ -5,13 +5,21 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kach.easylearning.view.util.QuestionsDiffUtilCallback
 import com.kach.easylearning.R
-import com.kach.easylearning.databinding.QuestionItemBinding
 import com.kach.easylearning.data.model.EasyLearningQuestion
+import com.kach.easylearning.databinding.QuestionItemBinding
+import com.kach.easylearning.view.util.QuestionsDiffUtilCallback
 
 class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionStackViewHolder>() {
+    private var runningOutListener: (() -> Unit)? = null
+
     private val items = mutableListOf<EasyLearningQuestion>()
+
+    var currentPosition: Int? = null
+        set(value) {
+            field = value
+            value?.let { if (value >= items.size - 2) runningOutListener?.invoke() }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionStackViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,9 +42,16 @@ class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionS
 
     fun setItems(newItems: List<EasyLearningQuestion>) {
         val diff = DiffUtil.calculateDiff(QuestionsDiffUtilCallback(items, newItems))
+        val sizeDiff = newItems.size - items.size
         items.clear()
         items.addAll(newItems)
-        diff.dispatchUpdatesTo(this)
+        if (sizeDiff > 0) notifyItemRangeInserted(items.size, sizeDiff)
+        //diff.dispatchUpdatesTo(this)
+        currentPosition = if (currentPosition == null) 0 else currentPosition
+    }
+
+    fun setRunningOutListener(block: (() -> Unit)) {
+        runningOutListener = block
     }
 
     class QuestionStackViewHolder(val binding: QuestionItemBinding) : RecyclerView.ViewHolder(binding.root)

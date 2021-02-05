@@ -9,6 +9,9 @@ import com.kach.easylearning.activityViewModels
 import com.kach.easylearning.databinding.QuestionsFragmentBinding
 import com.kach.easylearning.view.adapters.QuestionStackAdapter
 import com.kach.easylearning.viewmodels.MainActivityViewModel
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackListener
+import com.yuyakaido.android.cardstackview.Direction
 
 class QuestionsFragment : Fragment() {
     private val viewModel: MainActivityViewModel by activityViewModels()
@@ -26,7 +29,36 @@ class QuestionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val stackAdapter = QuestionStackAdapter()
+        stackAdapter.setRunningOutListener { viewModel.shuffleQuestions() }
         binding.questionsStack.adapter = stackAdapter
-        viewModel.questionList.observe(viewLifecycleOwner){ stackAdapter.setItems(it) }
+        binding.questionsStack.layoutManager = CardStackLayoutManager(context, object : CardStackListener {
+            override fun onCardDragging(direction: Direction?, ratio: Float) {
+                //NO-OP
+            }
+
+            override fun onCardSwiped(direction: Direction?) {
+                //NO-OP
+            }
+
+            override fun onCardRewound() {
+                //NO-OP
+            }
+
+            override fun onCardCanceled() {
+                //NO-OP
+            }
+
+            override fun onCardAppeared(view: View?, position: Int) {
+                stackAdapter.currentPosition = position
+            }
+
+            override fun onCardDisappeared(view: View?, position: Int) {
+                //NO-OP
+            }
+
+        })
+        viewModel.questionList.observe(viewLifecycleOwner) {
+            binding.questionsStack.post { stackAdapter.setItems(it) }
+        }
     }
 }

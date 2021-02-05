@@ -12,4 +12,6 @@
     <color name="collections_title_text_dark">@color/white</color>
     <color name="questions_stroke">#B4B4B4</color>
     <color name="question_text">@color/black</color>
+    <color name="left_overlay_background">#99D50000</color>
+    <color name="right_overlay_background">#9900C853</color>
 </resources>

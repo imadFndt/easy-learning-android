@@ -19,7 +19,6 @@ class Repository @Inject constructor(private val easyLearningService: EasyLearni
         emit(questions)
     }.flowOn(Dispatchers.IO)
 
-
     override suspend fun getCollections() =
         flow { easyLearningService.getCollections().also { emit(it) } }.flowOn(Dispatchers.IO)
 }

@@ -46,11 +46,6 @@ class MainActivityViewModel @Inject constructor(private val repository: BaseRepo
         }
     }
 
-    private fun onNext(collection: EasyLearningCollection) {
-        val items = collectionListData.value ?: mutableListOf()
-        items.add(collection)
-    }
-
     private fun runJob(block: suspend (() -> Unit)) {
         loadingJob?.let { previousJob = loadingJob }
         loadingJob = viewModelScope.launch {
@@ -58,5 +53,12 @@ class MainActivityViewModel @Inject constructor(private val repository: BaseRepo
             block()
             loadingJob = null
         }
+    }
+
+    fun shuffleQuestions() {
+        val list: MutableList<EasyLearningQuestion>? = questionListData.value?.toMutableList()
+        val secondList = list?.toMutableList()?.apply { shuffle() }
+        secondList?.let { list.addAll(it) }
+        questionListData.value = list
     }
 }
