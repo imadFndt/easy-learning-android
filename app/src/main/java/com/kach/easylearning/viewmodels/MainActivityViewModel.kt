@@ -1,40 +1,54 @@
 package com.kach.easylearning.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.kach.easylearning.model.EasyLearningCollectionTemp
-import com.kach.easylearning.model.EasyLearningQuestion
-import com.kach.easylearning.model.Repository
+import androidx.lifecycle.*
+import com.kach.easylearning.data.model.EasyLearningCollection
+import com.kach.easylearning.data.model.EasyLearningQuestion
+import com.kach.easylearning.data.repository.BaseRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
-    val collectionList: LiveData<List<EasyLearningCollectionTemp>> get() = tempCollectionListData
-    val questionList: LiveData<List<EasyLearningQuestion>> get() = repository.questionList
-    val selectedCollection: LiveData<EasyLearningCollectionTemp?> get() = selectedCollectionData
-    val messages = repository.messages
+class MainActivityViewModel @Inject constructor(private val repository: BaseRepository) : ViewModel() {
+    val collectionList: LiveData<List<EasyLearningCollection>>
+        get() = collectionListData.switchMap {
+            MutableLiveData(it)
+        }
+    val questionList: LiveData<List<EasyLearningQuestion>> get() = questionListData
+    val selectedCollection: LiveData<EasyLearningCollection?> get() = selectedCollectionData
 
-    private val tempCollectionListData = repository.tempCollectionList
-    private val selectedCollectionData = MutableLiveData<EasyLearningCollectionTemp>()
+    private val collectionListData = MutableLiveData<MutableList<EasyLearningCollection>>()
+    private val questionListData = MutableLiveData<List<EasyLearningQuestion>>()
+    private val selectedCollectionData = MutableLiveData<EasyLearningCollection>()
+
 
     private var loadingJob: Job? = null
     private var previousJob: Job? = null
 
     init {
-        runJob { repository.loadAll() }
+        runJob {
+            repository.getCollections().buffer().collect { collectionListData.value = it.toMutableList() }
+        }
     }
 
-    private fun requestQuestions(collection: EasyLearningCollectionTemp) {
-        runJob { repository.requestQuestions(collection) }
-    }
-
-    fun setSelectedCollection(collection: EasyLearningCollectionTemp?) {
+    fun setSelectedCollection(collection: EasyLearningCollection?) {
         selectedCollectionData.value = collection
         collection?.let { requestQuestions(it) }
+    }
+
+    private fun requestQuestions(collection: EasyLearningCollection) {
+        runJob {
+            repository.requestQuestions(collection).buffer().collect {
+                questionListData.value = it.toMutableList()
+            }
+        }
+    }
+
+    private fun onNext(collection: EasyLearningCollection) {
+        val items = collectionListData.value ?: mutableListOf()
+        items.add(collection)
     }
 
     private fun runJob(block: suspend (() -> Unit)) {

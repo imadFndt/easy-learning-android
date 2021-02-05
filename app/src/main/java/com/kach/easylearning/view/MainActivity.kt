@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
             val controller = findNavController(R.id.nav_fragment)
             selected?.let { controller.navigate(R.id.collections_to_test) } ?: run { controller.navigateUp() }
         }
-        viewModel.messages.observe(this) { state ->
-            if (!state) Toast.makeText(this, "Something's wrong", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onBackPressed() {

@@ -1,7 +1,7 @@
-package com.kach.easylearning
+package com.kach.easylearning.view.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.kach.easylearning.model.EasyLearningQuestion
+import com.kach.easylearning.data.model.EasyLearningQuestion
 
 class QuestionsDiffUtilCallback(
     private val oldList: List<EasyLearningQuestion>,

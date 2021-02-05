@@ -1,6 +1,7 @@
-package com.kach.easylearning.model
+package com.kach.easylearning.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class EasyLearningCollection(
     val id: String,
@@ -9,5 +10,7 @@ data class EasyLearningCollection(
     @SerializedName("author_id")
     val authorId: String,
     //TODO DateConverter
-    val created: String
+    val created: String,
+    @SerializedName("questions_count")
+    val questionsCount: Int
 )

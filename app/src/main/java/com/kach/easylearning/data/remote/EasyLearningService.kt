@@ -1,8 +1,8 @@
-package com.kach.easylearning.remote
+package com.kach.easylearning.data.remote
 
-import com.kach.easylearning.model.AuthToken
-import com.kach.easylearning.model.EasyLearningCollection
-import com.kach.easylearning.model.EasyLearningQuestion
+import com.kach.easylearning.data.model.AuthToken
+import com.kach.easylearning.data.model.EasyLearningCollection
+import com.kach.easylearning.data.model.EasyLearningQuestion
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST

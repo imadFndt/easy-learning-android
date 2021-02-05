@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kach.easylearning.QuestionsDiffUtilCallback
+import com.kach.easylearning.view.util.QuestionsDiffUtilCallback
 import com.kach.easylearning.R
 import com.kach.easylearning.databinding.QuestionItemBinding
-import com.kach.easylearning.model.EasyLearningQuestion
+import com.kach.easylearning.data.model.EasyLearningQuestion
 
 class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionStackViewHolder>() {
     private val items = mutableListOf<EasyLearningQuestion>()
