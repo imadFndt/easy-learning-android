@@ -9,8 +9,7 @@ data class EasyLearningCollection(
     val description: String,
     @SerializedName("author_id")
     val authorId: String,
-    //TODO DateConverter
-    val created: String,
+    val created: Date,
     @SerializedName("questions_count")
     val questionsCount: Int
 )
