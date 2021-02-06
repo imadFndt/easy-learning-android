@@ -3,4 +3,15 @@
     <string name="total_questions">%d questions</string>
     <string name="todo" translatable="false">Todo</string>
     <string name="question_number">Question %d</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="collections">Collections</string>
+    <string name="favorite_description">Favorite collection</string>
+    <string name="collection">Collection</string>
+    <string name="start_button">Start button</string>
+    <string name="author">Author</string>
+    <string name="questions_amount">Number of questions</string>
+    <string name="description">Description</string>
+    <string name="questions">Questions</string>
 </resources>

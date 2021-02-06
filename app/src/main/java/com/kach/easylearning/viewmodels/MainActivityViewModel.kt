@@ -4,11 +4,9 @@ import androidx.lifecycle.*
 import com.kach.easylearning.data.model.EasyLearningCollection
 import com.kach.easylearning.data.model.EasyLearningQuestion
 import com.kach.easylearning.data.repository.BaseRepository
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(private val repository: BaseRepository) : ViewModel() {
@@ -18,14 +16,18 @@ class MainActivityViewModel @Inject constructor(private val repository: BaseRepo
         }
     val questionList: LiveData<List<EasyLearningQuestion>> get() = questionListData
     val selectedCollection: LiveData<EasyLearningCollection?> get() = selectedCollectionData
+    val timer: LiveData<Int?> get() = timerData
 
     private val collectionListData = MutableLiveData<MutableList<EasyLearningCollection>>()
     private val questionListData = MutableLiveData<List<EasyLearningQuestion>>()
     private val selectedCollectionData = MutableLiveData<EasyLearningCollection>()
 
+    private val timerData = MutableLiveData<Int?>()
 
     private var loadingJob: Job? = null
     private var previousJob: Job? = null
+
+    private var timerJob: Job? = null
 
     init {
         runJob {
@@ -60,5 +62,17 @@ class MainActivityViewModel @Inject constructor(private val repository: BaseRepo
         val secondList = list?.toMutableList()?.apply { shuffle() }
         secondList?.let { list.addAll(it) }
         questionListData.value = list
+    }
+
+    fun runTimer() {
+        timerJob = viewModelScope.launch(Dispatchers.Main) {
+            timerData.value = 0
+            var current: Int
+            while (isActive) {
+                current = timerData.value ?: 0
+                delay(1000)
+                timerData.value = current + 1
+            }
+        }
     }
 }
