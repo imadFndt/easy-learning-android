@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Easy Learning</string>
     <string name="total_questions">%d questions</string>
     <string name="todo" translatable="false">Todo</string>
-    <string name="question_number">Question %d</string>
+    <string name="question_number">№ %d</string>
     <string name="home">Home</string>
     <string name="favorite">Favorites</string>
     <string name="profile">Profile</string>
@@ -14,4 +14,5 @@
     <string name="questions_amount">Number of questions</string>
     <string name="description">Description</string>
     <string name="questions">Questions</string>
+    <string name="timer_state" translatable="false">%s:%s</string>
 </resources>

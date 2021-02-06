@@ -12,8 +12,11 @@
         android:layout_marginStart="@dimen/text_margin_collection_item"
         android:layout_marginTop="@dimen/text_margin_collection_item"
         android:textColor="@color/collections_title_text"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@id/collection_description"
+        app:layout_constraintEnd_toStartOf="@id/collection_questions_amount"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Интегралы" />
@@ -40,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_margin_collection_item"
         android:layout_marginEnd="@dimen/text_margin_collection_item"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="27 вопросов" />
@@ -49,12 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:tint="@color/favorite_bookmark"
         android:layout_marginEnd="@dimen/text_margin_collection_item"
         android:contentDescription="@string/favorite_description"
         android:src="@drawable/ic_baseline_bookmark_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/collection_questions_amount"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintVertical_bias="0"
+        app:tint="@color/favorite_bookmark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

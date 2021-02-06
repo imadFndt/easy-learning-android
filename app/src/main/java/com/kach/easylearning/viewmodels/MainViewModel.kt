@@ -1,15 +1,19 @@
 package com.kach.easylearning.viewmodels
 
 import androidx.lifecycle.*
+import com.kach.easylearning.R
 import com.kach.easylearning.data.model.EasyLearningCollection
 import com.kach.easylearning.data.model.EasyLearningQuestion
 import com.kach.easylearning.data.repository.BaseRepository
+import com.kach.easylearning.view.util.MainNavState
+import com.kach.easylearning.view.util.NavState
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(private val repository: BaseRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: BaseRepository) : ViewModel() {
+    val navState: LiveData<NavState> get() = navStateData
     val collectionList: LiveData<List<EasyLearningCollection>>
         get() = collectionListData.switchMap {
             MutableLiveData(it)
@@ -18,9 +22,12 @@ class MainActivityViewModel @Inject constructor(private val repository: BaseRepo
     val selectedCollection: LiveData<EasyLearningCollection?> get() = selectedCollectionData
     val timer: LiveData<Int?> get() = timerData
 
+    private val navStateData = MutableLiveData<NavState>()
     private val collectionListData = MutableLiveData<MutableList<EasyLearningCollection>>()
     private val questionListData = MutableLiveData<List<EasyLearningQuestion>>()
     private val selectedCollectionData = MutableLiveData<EasyLearningCollection>()
+
+    private val mainNavState = MainNavState()
 
     private val timerData = MutableLiveData<Int?>()
 
@@ -38,6 +45,13 @@ class MainActivityViewModel @Inject constructor(private val repository: BaseRepo
     fun setSelectedCollection(collection: EasyLearningCollection?) {
         selectedCollectionData.value = collection
         collection?.let { requestQuestions(it) }
+        mainNavState.isItemSelected = true
+        navStateData.value = mainNavState
+    }
+
+    fun setTestGoing(isGoing: Boolean) {
+        mainNavState.isTestGoing = isGoing
+        navStateData.value = mainNavState
     }
 
     private fun requestQuestions(collection: EasyLearningCollection) {
@@ -73,6 +87,15 @@ class MainActivityViewModel @Inject constructor(private val repository: BaseRepo
                 delay(1000)
                 timerData.value = current + 1
             }
+        }
+    }
+
+    fun setNavState(graphId: Int) {
+        navStateData.value = when (graphId) {
+            R.id.main_nav_graph -> mainNavState
+            R.id.profile_nav_graph -> null
+            R.id.favorites_nav_graph -> null
+            else -> null
         }
     }
 }

@@ -11,10 +11,10 @@ import com.kach.easylearning.R
 import com.kach.easylearning.activityViewModels
 import com.kach.easylearning.databinding.CollectionListFragmentBinding
 import com.kach.easylearning.view.adapters.CollectionListAdapter
-import com.kach.easylearning.viewmodels.MainActivityViewModel
+import com.kach.easylearning.viewmodels.MainViewModel
 
 class CollectionListFragment : Fragment() {
-    private val activityViewModel: MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainViewModel by activityViewModels()
     private lateinit var binding: CollectionListFragmentBinding
 
     override fun onCreateView(

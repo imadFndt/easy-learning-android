@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kach.easylearning.R
 import com.kach.easylearning.data.model.EasyLearningQuestion
 import com.kach.easylearning.databinding.QuestionItemBinding
 import com.kach.easylearning.view.util.QuestionsDiffUtilCallback
@@ -31,8 +30,6 @@ class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionS
         val item = items[holder.bindingAdapterPosition]
         with(holder.binding) {
             questionText.text = item.data
-            questionNumberText.text =
-                root.context.getString(R.string.question_number, holder.bindingAdapterPosition + 1)
             questionDescriptionText.text = item.description
             questionDescriptionText.isVisible = item.description != null
         }

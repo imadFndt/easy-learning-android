@@ -1,7 +1,7 @@
 package com.kach.easylearning.dagger
 
 import androidx.lifecycle.ViewModel
-import com.kach.easylearning.viewmodels.MainActivityViewModel
+import com.kach.easylearning.viewmodels.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -10,6 +10,6 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
     @Binds
     @IntoMap
-    @ViewModelKey(MainActivityViewModel::class)
-    abstract fun main(v: MainActivityViewModel): ViewModel
+    @ViewModelKey(MainViewModel::class)
+    abstract fun main(v: MainViewModel): ViewModel
 }
