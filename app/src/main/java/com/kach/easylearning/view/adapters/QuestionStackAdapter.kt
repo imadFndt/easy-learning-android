@@ -11,10 +11,9 @@ import com.kach.easylearning.view.util.QuestionsDiffUtilCallback
 
 class QuestionStackAdapter : RecyclerView.Adapter<QuestionStackAdapter.QuestionStackViewHolder>() {
     private var runningOutListener: (() -> Unit)? = null
-
     private val items = mutableListOf<EasyLearningQuestion>()
 
-    var currentPosition: Int? = null
+    var currentPosition: Int? = 0
         set(value) {
             field = value
             value?.let { if (value >= items.size - 2) runningOutListener?.invoke() }

@@ -1,93 +1,74 @@
 package com.kach.easylearning.viewmodels
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import com.kach.easylearning.R
 import com.kach.easylearning.data.model.EasyLearningCollection
 import com.kach.easylearning.data.model.EasyLearningQuestion
-import com.kach.easylearning.data.repository.BaseRepository
+import com.kach.easylearning.data.model.TimerLiveData
+import com.kach.easylearning.data.repository.Repository
 import com.kach.easylearning.view.util.MainNavState
 import com.kach.easylearning.view.util.NavState
-import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val repository: BaseRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: Repository) : BaseViewModel() {
     val navState: LiveData<NavState> get() = navStateData
+
     val collectionList: LiveData<List<EasyLearningCollection>>
-        get() = collectionListData.switchMap {
-            MutableLiveData(it)
-        }
+        get() = collectionListData.switchMap { MutableLiveData(it) }
     val questionList: LiveData<List<EasyLearningQuestion>> get() = questionListData
     val selectedCollection: LiveData<EasyLearningCollection?> get() = selectedCollectionData
-    val timer: LiveData<Int?> get() = timerData
+    val shuffledQuestionList: LiveData<List<EasyLearningQuestion>> get() = shuffledQuestionListData
 
-    private val navStateData = MutableLiveData<NavState>()
-    private val collectionListData = MutableLiveData<MutableList<EasyLearningCollection>>()
-    private val questionListData = MutableLiveData<List<EasyLearningQuestion>>()
-    private val selectedCollectionData = MutableLiveData<EasyLearningCollection>()
+    val timerTime: LiveData<Int> get() = timer
 
     private val mainNavState = MainNavState()
+    private val navStateData = MutableLiveData<NavState>(mainNavState)
 
-    private val timerData = MutableLiveData<Int?>()
+    private val collectionListData = MutableLiveData<MutableList<EasyLearningCollection>>()
+    private val questionListData = MutableLiveData<List<EasyLearningQuestion>>()
+    private val shuffledQuestionListData = MutableLiveData<List<EasyLearningQuestion>>()
+    private val selectedCollectionData = MutableLiveData<EasyLearningCollection>()
 
-    private var loadingJob: Job? = null
-    private var previousJob: Job? = null
-
-    private var timerJob: Job? = null
+    private val timer = TimerLiveData(viewModelScope)
 
     init {
         runJob {
             repository.getCollections().buffer().collect { collectionListData.value = it.toMutableList() }
         }
+        mainNavState.setUpdateCallback { navStateData.value = mainNavState }
     }
 
     fun setSelectedCollection(collection: EasyLearningCollection?) {
         selectedCollectionData.value = collection
-        collection?.let { requestQuestions(it) }
-        mainNavState.isItemSelected = true
-        navStateData.value = mainNavState
-    }
-
-    fun setTestGoing(isGoing: Boolean) {
-        mainNavState.isTestGoing = isGoing
-        navStateData.value = mainNavState
-    }
-
-    private fun requestQuestions(collection: EasyLearningCollection) {
-        runJob {
-            repository.requestQuestions(collection).buffer().collect {
-                questionListData.value = it.toMutableList()
-            }
+        collection?.let {
+            requestQuestions(it)
+            mainNavState.navigateStateIn()
+        } ?: run {
+            mainNavState.navigateStateUp()
         }
     }
 
-    private fun runJob(block: suspend (() -> Unit)) {
-        loadingJob?.let { previousJob = loadingJob }
-        loadingJob = viewModelScope.launch {
-            previousJob?.cancelAndJoin()
-            block()
-            loadingJob = null
+    fun setTestGoing(isGoing: Boolean) {
+        if (isGoing) {
+            mainNavState.navigateStateIn()
+            timer.runTimer()
+            shuffledQuestionListData.value = questionList.value
+        } else {
+            timer.stopTimer()
+            mainNavState.navigateStateUp()
         }
     }
 
     fun shuffleQuestions() {
-        val list: MutableList<EasyLearningQuestion>? = questionListData.value?.toMutableList()
+        val list: MutableList<EasyLearningQuestion>? = shuffledQuestionList.value?.toMutableList()
         val secondList = list?.toMutableList()?.apply { shuffle() }
         secondList?.let { list.addAll(it) }
-        questionListData.value = list
-    }
-
-    fun runTimer() {
-        timerJob = viewModelScope.launch(Dispatchers.Main) {
-            timerData.value = 0
-            var current: Int
-            while (isActive) {
-                current = timerData.value ?: 0
-                delay(1000)
-                timerData.value = current + 1
-            }
-        }
+        shuffledQuestionListData.value = list
     }
 
     fun setNavState(graphId: Int) {
@@ -97,5 +78,32 @@ class MainViewModel @Inject constructor(private val repository: BaseRepository) 
             R.id.favorites_nav_graph -> null
             else -> null
         }
+    }
+
+    fun onBackPressed(): Boolean {
+        when {
+            mainNavState.isTestGoing -> {
+                timer.stopTimer()
+                setTestGoing(false)
+            }
+            mainNavState.isItemSelected -> {
+                setSelectedCollection(null)
+            }
+        }
+        return true
+    }
+
+    private fun requestQuestions(collection: EasyLearningCollection) {
+        runJob {
+            repository.getQuestions(collection).buffer().collect {
+                questionListData.value = it.toMutableList()
+                shuffledQuestionListData.value = it.toMutableList()
+            }
+        }
+    }
+
+    override fun onCleared() {
+        mainNavState.setUpdateCallback(null)
+        super.onCleared()
     }
 }

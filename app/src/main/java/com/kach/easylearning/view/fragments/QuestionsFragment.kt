@@ -32,6 +32,9 @@ class QuestionsFragment : Fragment() {
         val stackAdapter = QuestionStackAdapter()
         stackAdapter.setRunningOutListener { viewModel.shuffleQuestions() }
         binding.questionsStack.adapter = stackAdapter
+        binding.questionNumber.text = getString(
+            R.string.question_number, stackAdapter.currentPosition?.plus(1)
+        )
         binding.questionsStack.layoutManager = CardStackLayoutManager(context, object : CardStackListener {
             override fun onCardDragging(direction: Direction?, ratio: Float) {
                 //NO-OP
@@ -59,10 +62,10 @@ class QuestionsFragment : Fragment() {
             }
 
         })
-        viewModel.questionList.observe(viewLifecycleOwner) {
+        viewModel.shuffledQuestionList.observe(viewLifecycleOwner) {
             binding.questionsStack.post { stackAdapter.setItems(it) }
         }
-        viewModel.timer.observe(viewLifecycleOwner) { time ->
+        viewModel.timerTime.observe(viewLifecycleOwner) { time ->
             time ?: return@observe
             val minutes = time / 60
             val seconds = time % 60
@@ -70,6 +73,5 @@ class QuestionsFragment : Fragment() {
             val secondsString = if (seconds > 9) seconds else "0$seconds"
             binding.questionTimer.text = getString(R.string.timer_state, minutesString, secondsString)
         }
-        viewModel.runTimer()
     }
 }

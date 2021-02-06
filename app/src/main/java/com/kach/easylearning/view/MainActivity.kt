@@ -52,16 +52,21 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar(): LiveData<NavController> =
         binding.bottomNavigationView.setupWithNavController(
             navGraphIds = listOf(
-                R.navigation.main_nav_graph,
-                R.navigation.favorites_nav_graph,
-                R.navigation.profile_nav_graph
+                R.navigation.main_nav_graph, R.navigation.favorites_nav_graph, R.navigation.profile_nav_graph
             ),
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_fragment,
         )
 
     override fun onBackPressed() {
-        viewModel.selectedCollection.value?.let { viewModel.setSelectedCollection(null) }
-            ?: run { super.onBackPressed() }
+        when (currentNavController.value?.graph?.id) {
+            R.id.main_nav_graph -> if (viewModel.onBackPressed()) return
+        }
+        clearAndFinish()
+    }
+
+    private fun clearAndFinish() {
+        viewModelStore.clear()
+        finish()
     }
 }

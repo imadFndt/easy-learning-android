@@ -8,15 +8,28 @@ class MainNavState : NavState() {
     override var actualDestinationId: Int = destinations[0]
     override val forwardDirections = listOf(R.id.collections_to_description, R.id.description_to_questions)
 
+    override fun navigateUp() {
+        when {
+            isTestGoing -> isTestGoing = false
+            isItemSelected -> isItemSelected = false
+        }
+    }
+
+    override fun navigateIn() {
+        when {
+            !isItemSelected -> isItemSelected = true
+            !isTestGoing -> isTestGoing = true
+        }
+    }
+
     var isItemSelected = false
-        set(value) {
+        private set(value) {
             field = value
             updateDestination()
         }
 
     var isTestGoing = false
-        set(value) {
-            if (!isItemSelected) throw IllegalStateException()
+        private set(value) {
             field = value
             updateDestination()
         }
@@ -28,5 +41,4 @@ class MainNavState : NavState() {
             else -> destinations[0]
         }
     }
-
 }
