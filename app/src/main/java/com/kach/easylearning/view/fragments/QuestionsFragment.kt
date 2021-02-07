@@ -33,7 +33,7 @@ class QuestionsFragment : Fragment() {
         stackAdapter.setRunningOutListener { viewModel.shuffleQuestions() }
         binding.questionsStack.adapter = stackAdapter
         binding.questionNumber.text = getString(
-            R.string.question_number, stackAdapter.currentPosition?.plus(1)
+            R.string.question_number, viewModel.testPosition.plus(1)
         )
         binding.questionsStack.layoutManager = CardStackLayoutManager(context, object : CardStackListener {
             override fun onCardDragging(direction: Direction?, ratio: Float) {
@@ -54,6 +54,7 @@ class QuestionsFragment : Fragment() {
 
             override fun onCardAppeared(view: View?, position: Int) {
                 stackAdapter.currentPosition = position
+                viewModel.testPosition = position
                 binding.questionNumber.text = getString(R.string.question_number, position + 1)
             }
 
@@ -63,7 +64,12 @@ class QuestionsFragment : Fragment() {
 
         })
         viewModel.shuffledQuestionList.observe(viewLifecycleOwner) { list ->
-            binding.questionsStack.post { list?.let { stackAdapter.setItems(it) } }
+            binding.questionsStack.post {
+                list?.let { stackAdapter.setItems(it) }
+                if (stackAdapter.currentPosition != viewModel.testPosition) {
+                    binding.questionsStack.scrollToPosition(viewModel.testPosition)
+                }
+            }
         }
         viewModel.timerTime.observe(viewLifecycleOwner) { time ->
             time ?: return@observe

@@ -23,6 +23,7 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Ba
     val showCollectionsLoadError: LiveData<Boolean> get() = showCollectionsLoadErrorData
     var isQuestionLoadErrorToastShown = false
     var isCollectionLoadErrorToastShown = false
+    var testPosition = 0
 
     val collectionList: LiveData<List<EasyLearningCollection>> get() = collectionListData
 
@@ -118,6 +119,7 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Ba
 
     private fun setTestGoing(isGoing: Boolean) {
         if (isGoing) {
+            testPosition = 0
             mainNavState.navigateStateIn()
             timer.runTimer()
             shuffledQuestionListData.value = questionList.value
