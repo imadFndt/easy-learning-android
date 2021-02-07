@@ -62,8 +62,8 @@ class QuestionsFragment : Fragment() {
             }
 
         })
-        viewModel.shuffledQuestionList.observe(viewLifecycleOwner) {
-            binding.questionsStack.post { stackAdapter.setItems(it) }
+        viewModel.shuffledQuestionList.observe(viewLifecycleOwner) { list ->
+            binding.questionsStack.post { list?.let { stackAdapter.setItems(it) } }
         }
         viewModel.timerTime.observe(viewLifecycleOwner) { time ->
             time ?: return@observe

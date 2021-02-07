@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="menu_checked">@color/white</color>
-    <color name="menu_unchecked">#CCCCCC</color>
+    <color name="menu_unchecked">#DDDDDD</color>
     <color name="main">#458EFC</color>
     <color name="main_light">#4F98FF</color>
     <color name="collections_title_text">@color/black</color>

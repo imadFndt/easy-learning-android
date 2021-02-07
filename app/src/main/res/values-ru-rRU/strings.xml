@@ -13,4 +13,6 @@
     <string name="questions_amount">Количество вопросов:</string>
     <string name="description">Описание:</string>
     <string name="questions">Рассматриваемые вопросы</string>
+    <string name="failed_collections_load">Не удалось загрузить коллекции</string>
+    <string name="failed_questions_load">Не удалось загрузить вопросы</string>
 </resources>

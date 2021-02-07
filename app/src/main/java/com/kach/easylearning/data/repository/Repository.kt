@@ -5,6 +5,6 @@ import com.kach.easylearning.data.model.EasyLearningQuestion
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    suspend fun getCollections(): Flow<List<EasyLearningCollection>>
-    suspend fun getQuestions(collection: EasyLearningCollection): Flow<List<EasyLearningQuestion>>
+    suspend fun getCollections(): Flow<Result<List<EasyLearningCollection>>>
+    suspend fun getQuestions(collection: EasyLearningCollection): Flow<Result<List<EasyLearningQuestion>>>
 }

@@ -15,4 +15,6 @@
     <string name="description">Description</string>
     <string name="questions">Questions</string>
     <string name="timer_state" translatable="false">%s:%s</string>
+    <string name="failed_collections_load">Failed to load collections</string>
+    <string name="failed_questions_load">Failed to load questions</string>
 </resources>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,6 +29,8 @@ class CollectionListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.swipeRefresh.setColorSchemeResources(R.color.main)
+        binding.swipeRefresh.setOnRefreshListener { activityViewModel.loadCollections() }
         val listAdapter = CollectionListAdapter()
         listAdapter.setItemClickListener { activityViewModel.setSelectedCollection(it) }
         with(binding.recycler) {
@@ -39,5 +42,15 @@ class CollectionListFragment : Fragment() {
             addItemDecoration(decor)
         }
         activityViewModel.collectionList.observe(viewLifecycleOwner) { listAdapter.setItems(it) }
+        activityViewModel.isLoadingCollections.observe(viewLifecycleOwner) { isLoading ->
+            if (binding.swipeRefresh.isRefreshing != isLoading) binding.swipeRefresh.isRefreshing = isLoading
+        }
+        activityViewModel.showCollectionsLoadError.observe(viewLifecycleOwner) { isError ->
+            if (isError && !activityViewModel.isCollectionLoadErrorToastShown) {
+                Toast.makeText(context, getString(R.string.failed_collections_load), Toast.LENGTH_SHORT)
+                    .show()
+                activityViewModel.isCollectionLoadErrorToastShown = true
+            }
+        }
     }
 }

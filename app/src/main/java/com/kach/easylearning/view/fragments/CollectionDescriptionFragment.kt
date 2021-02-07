@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.kach.easylearning.R
@@ -36,7 +38,7 @@ class CollectionDescriptionFragment : Fragment() {
             }
             addItemDecoration(decor)
         }
-        binding.startFab.setOnClickListener { activityViewModel.setTestGoing(true) }
+        binding.startFab.setOnClickListener { activityViewModel.requestTestStart() }
         activityViewModel.selectedCollection.observe(viewLifecycleOwner) { collection ->
             collection ?: return@observe
             with(binding) {
@@ -46,6 +48,17 @@ class CollectionDescriptionFragment : Fragment() {
                 collectionQuestionsAmountText.text = collection.questionsCount.toString()
             }
         }
-        activityViewModel.questionList.observe(viewLifecycleOwner) { listAdapter.setItems(it) }
+        activityViewModel.questionList.observe(viewLifecycleOwner) { list ->
+            binding.collectionQuestionsLayoutText.isVisible = list != null
+            binding.collectionQuestionsView.isVisible = list != null
+            binding.startFab.isVisible = list != null
+            list?.let { listAdapter.setItems(it) }
+        }
+        activityViewModel.showQuestionsLoadError.observe(viewLifecycleOwner) { isError ->
+            if (isError && !activityViewModel.isQuestionLoadErrorToastShown) {
+                Toast.makeText(context, getString(R.string.failed_questions_load), Toast.LENGTH_SHORT).show()
+                activityViewModel.isQuestionLoadErrorToastShown = true
+            }
+        }
     }
 }
