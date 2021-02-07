@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="menu_checked">@color/white</color>
+    <color name="menu_unchecked">#DDDDDD</color>
+    <color name="main">#458EFC</color>
+    <color name="main_light">#4F98FF</color>
+    <color name="collections_title_text">@color/black</color>
+    <color name="collections_list_divider">#D7D7D7</color>
+    <color name="collections_title_text_dark">@color/white</color>
+    <color name="collections_description_title_text">@color/black</color>
+    <color name="collections_description_layout_text">#AAAAAA</color>
+    <color name="questions_stroke">#B4B4B4</color>
+    <color name="question_text">@color/black</color>
+    <color name="left_overlay_background">#99D50000</color>
+    <color name="right_overlay_background">#9900C853</color>
+    <color name="favorite_bookmark">#ED8884</color>
 </resources>

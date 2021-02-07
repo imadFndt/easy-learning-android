@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_margin_collection_item">16dp</dimen>
+    <dimen name="text_margin_questions_fragment">16dp</dimen>
+    <dimen name="text_padding_collection_description">32dp</dimen>
+    <dimen name="question_text_size">20sp</dimen>
+    <dimen name="question_description_size">18sp</dimen>
+    <dimen name="question_padding">70dp</dimen>
+    <dimen name="text_margin_collection_description_fragment">16dp</dimen>
+    <dimen name="text_margin_variant_collection_description_fragment">8dp</dimen>
+    <dimen name="text_size_large_collection_description_fragment">32sp</dimen>
+    <dimen name="text_size_collection_description_fragment">24sp</dimen>
+    <dimen name="text_size_layout_collection_description_fragment">18sp</dimen>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="total_questions">%d вопросов</string>
+    <string name="question_number">Вопрос %d</string>
+    <string name="home">Главная</string>
+    <string name="favorite">Избранное</string>
+    <string name="profile">Профиль</string>
+    <string name="collections">Коллекции</string>
+    <string name="favorite_description">Избранная коллекция</string>
+    <string name="collection">Коллекция</string>
+    <string name="start_button">Start button</string>
+    <string name="author">Автор:</string>
+    <string name="questions_amount">Количество вопросов:</string>
+    <string name="description">Описание:</string>
+    <string name="questions">Рассматриваемые вопросы</string>
+    <string name="failed_collections_load">Не удалось загрузить коллекции</string>
+    <string name="failed_questions_load">Не удалось загрузить вопросы</string>
+</resources>

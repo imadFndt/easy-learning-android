@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/collection_title_layout_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_collection_description_fragment"
+                android:text="@string/collection"
+                android:textColor="@color/collections_description_layout_text"
+                android:textSize="@dimen/text_size_layout_collection_description_fragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Коллекция" />
+
+            <TextView
+                android:id="@+id/collection_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_variant_collection_description_fragment"
+                android:textColor="@color/collections_description_title_text"
+                android:textSize="@dimen/text_size_large_collection_description_fragment"
+                android:textStyle="bold"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_title_layout_text"
+                tools:text="Теория случайных процессов" />
+
+            <TextView
+                android:id="@+id/collection_author_layout_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_collection_description_fragment"
+                android:text="@string/author"
+                android:textColor="@color/collections_description_layout_text"
+                android:textSize="@dimen/text_size_layout_collection_description_fragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_title_text"
+                tools:text="Автор" />
+
+            <TextView
+                android:id="@+id/collection_author_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_variant_collection_description_fragment"
+                android:textColor="@color/collections_description_title_text"
+                android:textSize="@dimen/text_size_collection_description_fragment"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_author_layout_text"
+                tools:text="Самарский университет" />
+
+            <TextView
+                android:id="@+id/collection_questions_amount_layout_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_collection_description_fragment"
+                android:text="@string/questions_amount"
+                android:textColor="@color/collections_description_layout_text"
+                android:textSize="@dimen/text_size_layout_collection_description_fragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_author_text"
+                tools:text="Количество вопросов" />
+
+            <TextView
+                android:id="@+id/collection_questions_amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_variant_collection_description_fragment"
+                android:text="@string/collection"
+                android:textColor="@color/collections_description_title_text"
+                android:textSize="@dimen/text_size_collection_description_fragment"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_questions_amount_layout_text"
+                tools:text="43" />
+
+            <TextView
+                android:id="@+id/collection_description_layout_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_collection_description_fragment"
+                android:text="@string/description"
+                android:textColor="@color/collections_description_layout_text"
+                android:textSize="@dimen/text_size_layout_collection_description_fragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_questions_amount_text"
+                tools:text="Описание" />
+
+            <TextView
+                android:id="@+id/collection_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_variant_collection_description_fragment"
+                android:textColor="@color/collections_description_title_text"
+                android:textSize="@dimen/text_size_collection_description_fragment"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_description_layout_text"
+                tools:text="В данном учебном курсе рассматриваются основные понятия теории случайных процессов." />
+
+            <TextView
+                android:id="@+id/collection_questions_layout_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin_collection_description_fragment"
+                android:layout_marginTop="@dimen/text_margin_collection_description_fragment"
+                android:text="@string/questions"
+                android:textColor="@color/collections_description_layout_text"
+                android:textSize="@dimen/text_size_layout_collection_description_fragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_description_text"
+                tools:text="Рассматриваемые вопросы" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/collection_questions_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_variant_collection_description_fragment"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_questions_layout_text"
+                tools:itemCount="10"
+                tools:listitem="@layout/collection_description_list_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/start_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/text_margin_collection_description_fragment"
+        android:layout_marginBottom="@dimen/text_margin_collection_description_fragment"
+        android:backgroundTint="@color/main"
+        android:contentDescription="@string/start_button"
+        android:scaleType="center"
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24"
+        app:tint="@color/white" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

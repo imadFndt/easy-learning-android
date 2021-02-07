@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/collections_list">
+    <fragment
+        android:id="@+id/collections_list"
+        android:name="com.kach.easylearning.view.fragments.CollectionListFragment">
+        <action
+            android:id="@+id/collections_to_description"
+            app:destination="@id/collection_description" />
+    </fragment>
+    <fragment
+        android:id="@+id/collection_description"
+        android:name="com.kach.easylearning.view.fragments.CollectionDescriptionFragment">
+        <action
+            android:id="@+id/description_to_questions"
+            app:destination="@id/questions" />
+    </fragment>
+    <fragment
+        android:id="@+id/questions"
+        android:name="com.kach.easylearning.view.fragments.QuestionsFragment" />
+</navigation>
